@@ -97,7 +97,27 @@
       loadMainDartJs();
     }
   </script>
+
+  
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyBHRHGuRvuwf1SSDitqY7tyTLSJb7LcD-I",
+      authDomain: "phonedata-f8bcc.firebaseapp.com",
+      projectId: "phonedata-f8bcc",
+      storageBucket: "phonedata-f8bcc.appspot.com",
+      messagingSenderId: "534677952686",
+      appId: "1:534677952686:web:a2a733a5d051feed15753f",
+      measurementId: "G-YV12Y8FZB8"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </body>
-
-
 </html>

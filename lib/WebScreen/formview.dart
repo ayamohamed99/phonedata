@@ -1,4 +1,3 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emaxapp/WebScreen/viewdata.dart';
 import 'package:emaxapp/common_widgets/creat_button.dart';
 import 'package:emaxapp/common_widgets/creat_text_field.dart';
@@ -8,6 +7,8 @@ import 'package:emaxapp/utilities/text_style.dart';
 import 'package:emaxapp/utilities/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FormView extends StatefulWidget {
   static const route = "FormView";
@@ -27,9 +28,12 @@ class _FormViewState extends State<FormView> {
     super.initState();
     getDataProvider = Provider.of<GetDataProvider>(context, listen: false);
   }
+  // CollectionReference phoneData =
+  //       FirebaseFirestore.instance.collection('PhoneData');
 
   @override
   Widget build(BuildContext context) {
+     
     getDataProvider = Provider.of<GetDataProvider>(context, listen: true);
 
     return Scaffold(body: _body());
@@ -57,8 +61,7 @@ class _FormViewState extends State<FormView> {
   }
 
   Widget _form(Size size) {
-    // CollectionReference phoneData =
-    //     FirebaseFirestore.instance.collection('PhoneData');
+   
     final AlertDialog alert = AlertDialog(
         title: Text(
           error,
@@ -101,7 +104,9 @@ class _FormViewState extends State<FormView> {
                         .then((value) => {
                               if (getDataProvider.phoneData.valid == true)
                                 {
-                                   Navigator.pushNamed(context, ViewData.route)
+                                   Navigator.pushNamed(
+                                            context, ViewData.route)
+                                  //  Navigator.pushNamed(context, ViewData.route)
                                   // phoneData.add({
                                   //   'number': getDataProvider.phoneData.number,
                                   //   'valid': getDataProvider.phoneData.valid,
@@ -112,8 +117,9 @@ class _FormViewState extends State<FormView> {
                                   //   'location':
                                   //       getDataProvider.phoneData.location
                                   // }).then((value) => {
-                                  //   Navigator.pushNamed(context, ViewData.route)
-                                  // })
+                                  //       Navigator.pushNamed(
+                                  //           context, ViewData.route)
+                                  //     })
                                 }
                               else
                                 {
