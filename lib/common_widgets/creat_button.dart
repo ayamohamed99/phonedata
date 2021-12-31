@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CreatButton extends StatefulWidget {
@@ -37,29 +36,21 @@ class _CreatButtonState extends State<CreatButton> {
       onTap: widget.onPress,
       onHover: widget.onHover,
       child: Container(
-                margin: EdgeInsets.symmetric(
-                 vertical: widget.topMargin == null ? 10 : widget.topMargin),
-                height: widget.height,
-                width: widget.width,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: <Color>[
-                                Color(0xff764B0C),
-                                Color(0xffE7C475),
-                                Color(0xffBB8B3F),
-                                Color(0xffC9994C),
-                                Color(0xff9D6D22)
-                              ]),
-                    borderRadius: widget.buttonType == "smallbutton"
-                        ? BorderRadius.circular(5)
-                        : BorderRadius.circular(10)),
-                child: Text(
-                  widget.label,
-                  style: widget.labelStyle,
-                ),
-              ),
-            
+        margin: EdgeInsets.symmetric(
+            vertical: widget.topMargin == null ? 10 : widget.topMargin),
+        height: widget.height,
+        width: widget.width,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: Colors.blueGrey[800],
+            borderRadius: widget.buttonType == "smallbutton"
+                ? BorderRadius.circular(5)
+                : BorderRadius.circular(10)),
+        child: Text(
+          widget.label,
+          style: widget.labelStyle,
+        ),
+      ),
     );
   }
 }

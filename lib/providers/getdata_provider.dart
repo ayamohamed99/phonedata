@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:emaxapp/model/phone_model.dart';
+import 'package:emaxapp/providers/storedata.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -21,7 +23,6 @@ class GetDataProvider extends ChangeNotifier {
         phoneData = PhoneData.fromJson(jsonDecode(response.body));
         notifyListeners();
         print('success');
-        
       }
     } on DioError catch (error) {
       print('fail');
@@ -29,4 +30,6 @@ class GetDataProvider extends ChangeNotifier {
     }
     return phoneData.valid;
   }
+
+ 
 }

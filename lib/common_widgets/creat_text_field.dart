@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 class CreatTextField extends StatefulWidget {
   final String label;
-  final Function onnChanged , validator;
+  final Function onnChanged, validator;
   final TextEditingController controller;
 
   @override
@@ -12,7 +12,8 @@ class CreatTextField extends StatefulWidget {
     Key key,
     this.label,
     this.onnChanged,
-    this.controller, this.validator,
+    this.controller,
+    this.validator,
   });
 
   @override
@@ -27,7 +28,7 @@ class _CreatTextFieldState extends State<CreatTextField> {
         onChanged: widget.onnChanged,
         controller: widget.controller,
         validator: widget.validator,
-        style: Textfiled.display5(context),
+        style: searchfiled.display5(context),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
           filled: true,

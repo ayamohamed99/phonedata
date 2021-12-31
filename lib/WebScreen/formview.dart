@@ -1,3 +1,4 @@
+import 'package:emaxapp/WebScreen/listview_screen.dart';
 import 'package:emaxapp/WebScreen/viewdata.dart';
 import 'package:emaxapp/common_widgets/creat_button.dart';
 import 'package:emaxapp/common_widgets/creat_text_field.dart';
@@ -21,19 +22,18 @@ class FormView extends StatefulWidget {
 class _FormViewState extends State<FormView> {
   GetDataProvider getDataProvider;
   final formKey = GlobalKey<FormState>();
-  int numberOfItems = 1;
+  CollectionReference egypt = FirebaseFirestore.instance.collection('Egypt');
+  CollectionReference united = FirebaseFirestore.instance.collection('US');
+  CollectionReference canda = FirebaseFirestore.instance.collection('Belgium');
 
   @override
   void initState() {
     super.initState();
     getDataProvider = Provider.of<GetDataProvider>(context, listen: false);
   }
-  // CollectionReference phoneData =
-  //       FirebaseFirestore.instance.collection('PhoneData');
 
   @override
   Widget build(BuildContext context) {
-     
     getDataProvider = Provider.of<GetDataProvider>(context, listen: true);
 
     return Scaffold(body: _body());
@@ -61,17 +61,17 @@ class _FormViewState extends State<FormView> {
   }
 
   Widget _form(Size size) {
-   
     final AlertDialog alert = AlertDialog(
         title: Text(
           error,
+          textAlign: TextAlign.center,
           style: Maintext.display5(context),
         ),
         content: TextButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text("Okay"),
+          child: Text("Okay", style: Maintext.display5(context)),
         ));
 
     return Expanded(
@@ -94,8 +94,9 @@ class _FormViewState extends State<FormView> {
               ),
               CreatButton(
                 label: 'Search',
-                width: size.width * 0.19,
-                height: size.height * 0.08,
+                labelStyle: Textfiled.display5(context),
+                width: size.width * 0.2,
+                height: size.height * 0.05,
                 onPress: () {
                   if (formKey.currentState.validate()) {
                     formKey.currentState.save();
@@ -103,24 +104,7 @@ class _FormViewState extends State<FormView> {
                         .getPhoneData(phoneController.text)
                         .then((value) => {
                               if (getDataProvider.phoneData.valid == true)
-                                {
-                                   Navigator.pushNamed(
-                                            context, ViewData.route)
-                                  //  Navigator.pushNamed(context, ViewData.route)
-                                  // phoneData.add({
-                                  //   'number': getDataProvider.phoneData.number,
-                                  //   'valid': getDataProvider.phoneData.valid,
-                                  //   'contrycode':
-                                  //       getDataProvider.phoneData.countryCode,
-                                  //   'countryName':
-                                  //       getDataProvider.phoneData.countryName,
-                                  //   'location':
-                                  //       getDataProvider.phoneData.location
-                                  // }).then((value) => {
-                                  //       Navigator.pushNamed(
-                                  //           context, ViewData.route)
-                                  //     })
-                                }
+                                {add(getDataProvider.phoneData.countryCode)}
                               else
                                 {
                                   showDialog(
@@ -133,11 +117,48 @@ class _FormViewState extends State<FormView> {
                             });
                   }
                 },
+              ),
+              CreatButton(
+                label: 'History',
+                width: size.width * 0.2,
+                labelStyle: Textfiled.display5(context),
+                height: size.height * 0.05,
+                onPress: () {
+                  Navigator.pushNamed(context, HistoryScreen.route);
+                },
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  void add(String code) {
+    if (code == 'EG') {
+      egypt.add({
+        'number': getDataProvider.phoneData.number,
+        'valid': getDataProvider.phoneData.valid,
+        'contrycode': getDataProvider.phoneData.countryCode,
+        'countryName': getDataProvider.phoneData.countryName,
+        'location': getDataProvider.phoneData.location
+      }).then((value) => {Navigator.pushNamed(context, ViewData.route)});
+    } else if (code == 'US') {
+      united.add({
+        'number': getDataProvider.phoneData.number,
+        'valid': getDataProvider.phoneData.valid,
+        'contrycode': getDataProvider.phoneData.countryCode,
+        'countryName': getDataProvider.phoneData.countryName,
+        'location': getDataProvider.phoneData.location
+      }).then((value) => {Navigator.pushNamed(context, ViewData.route)});
+    } else if (code == 'BE') {
+      canda.add({
+        'number': getDataProvider.phoneData.number,
+        'valid': getDataProvider.phoneData.valid,
+        'contrycode': getDataProvider.phoneData.countryCode,
+        'countryName': getDataProvider.phoneData.countryName,
+        'location': getDataProvider.phoneData.location
+      }).then((value) => {Navigator.pushNamed(context, ViewData.route)});
+    }
   }
 }

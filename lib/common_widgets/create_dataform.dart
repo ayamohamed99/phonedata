@@ -13,14 +13,13 @@ class ShowFormData extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Textfiled.display5(context),
+          style: Viewfiled.display5(context),
         ),
         Text(
           info,
-          style: Textfiled.display5(context),
+          style: Viewfiled.display5(context),
         ),
       ],
     );
   }
 }
-

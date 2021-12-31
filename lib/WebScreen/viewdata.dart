@@ -1,3 +1,4 @@
+import 'package:emaxapp/WebScreen/listview_screen.dart';
 import 'package:emaxapp/common_widgets/creat_button.dart';
 import 'package:emaxapp/common_widgets/create_dataform.dart';
 import 'package:emaxapp/providers/getdata_provider.dart';
@@ -61,11 +62,7 @@ class _ViewDataState extends State<ViewData> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _title(),
-            _form(size),
-            _button(size),
-          ],
+          children: [_title(), _form(size), _button(size), _buttonSearch(size)],
         ),
       ),
     );
@@ -81,10 +78,23 @@ class _ViewDataState extends State<ViewData> {
   Widget _button(Size size) {
     return CreatButton(
       label: 'Back',
-      width: size.width * 0.19,
-      height: size.height * 0.08,
+      width: size.width * 0.2,
+      labelStyle: Textfiled.display5(context),
+      height: size.height * 0.05,
       onPress: () {
         Navigator.pop(context);
+      },
+    );
+  }
+
+  Widget _buttonSearch(Size size) {
+    return CreatButton(
+      label: 'History',
+      width: size.width * 0.2,
+      labelStyle: Textfiled.display5(context),
+      height: size.height * 0.05,
+      onPress: () {
+        Navigator.pushNamed(context, HistoryScreen.route);
       },
     );
   }
@@ -108,10 +118,10 @@ class _ViewDataState extends State<ViewData> {
           title: 'country_name : ',
           info: getDataProvider.phoneData.countryName,
         ),
-        ShowFormData(
-          title: 'location : ',
-          info: getDataProvider.phoneData.location.isEmpty   ?? 'no location avaliable'
-        ),
+        getDataProvider.phoneData.location == null
+            ? ShowFormData(
+                title: 'location : ', info: getDataProvider.phoneData.location)
+            : Container(),
         ShowFormData(
           title: 'carrier : ',
           info: getDataProvider.phoneData.carrier,
